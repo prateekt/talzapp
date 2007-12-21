@@ -1,8 +1,0 @@
-<?php
-
-//--- DO NOT CHANGE THIS ------
-
-$minversion = "4.2.0";
-$prefix     = "TestXml";
-
-?>
