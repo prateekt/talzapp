@@ -1390,7 +1390,9 @@ function toggleDisplay(id, type) {
     }
     $post_params = array();
     foreach ($params as $key => $val) {
-      if (is_array($val)) $params[$key] = implode(',', $val);
+      if (is_array($val)) {
+	  	 $params[$key] = implode(',', $val);
+	   }
       $post_params[] = $key.'='.urlencode($params[$key]);
     }
     $secret = $this->secret;
