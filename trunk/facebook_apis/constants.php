@@ -27,26 +27,4 @@ $callback_url = '';
  */
 $facebook_location = 'http://apps.facebook.com/tandonp/';
 
-//---------------------------------MySQL Database Constants---------------------------------------------------------
-
-/*
- * The IP Address of your database. By default, this should be local host.
- */
-$db_ip = 'localhost';           
-
-/*
- * The login name to the database.
- */
-$db_user = 'mvldorg';
-
-/*
- * The password to the database.
- */
-$db_pass = 'goodpassword';
-
-/*
- * The name of the database table.
- */
-$db_name = '';
-
 ?>
