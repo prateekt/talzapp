@@ -12,14 +12,19 @@ class DBManager {
 	/*
 	 * The socket connection object to the mysql database.
 	 */
-	var $dbConnection;
-
+	var $dbCon;
+	
 	/*
 	 * Constructor for a DBManager. Simply initializes $dbConnection, attempting to login.
 	 * If login fails, $dbConnection will be  null.
 	 */
 	function DBManager() {
-		$this->dbConnection = $this->login();
+		$this->dbCon = $this->login();
+		$this->test = $this->soup();
+	}
+	
+	function soup() {
+		return "SOUP";
 	}
 
 	/*
@@ -50,7 +55,7 @@ class DBManager {
 	 * @return true or false depending on whether the deletion to the database is successful.
 	 */
 	function deleteEntry($userId) {
-		$dbConnection = $this->login();
+		$dbConnection = $this->dbCon;
 		$userId = mysql_escape_string($userId);
 		if($dbConnection==NULL)
 			return false; //obviously, if the connection is not up, it can't delete the entry.
@@ -68,12 +73,13 @@ class DBManager {
 	 * @return true or false depending on whether the addition to the database is successful.
 	 */
 	function addEntry($userId, $friendList) {
-		$dbConnection = $this->login();
+		$dbConnection = $this->dbCon;
 		$userId = mysql_escape_string($userId);
-		if($dbConnection==NULL)
+		if($dbConnection==NULL) {
 			return false; //obviously, if the connection is not up, it can't add the entry.
 		//get rid of entry if already exists. If entry doesn't exist previously,
 		//this statement has really no effect.
+		}
 		$this->deleteEntry($userId);
 		$friendList = mysql_escape_string($friendList);
 		$query = "INSERT INTO ".$GLOBALS['ftable_name']." (UserId, FriendsList) VALUES ('".$userId. "', '".$friendList."')";
@@ -90,7 +96,7 @@ class DBManager {
 	 * @return friends list as a string array or empty array.
 	 */
 	function getFriendsList($userId) {
-		$dbConnection = $this->login();
+		$dbConnection = $this->dbCon;
 		$rtn = array();
 		if($dbConnection==NULL)
 			return array(); //obviously, if the connection is not up, it can't get the friends list.
