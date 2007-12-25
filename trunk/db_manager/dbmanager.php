@@ -20,11 +20,6 @@ class DBManager {
 	 */
 	function DBManager() {
 		$this->dbCon = $this->login();
-		$this->test = $this->soup();
-	}
-	
-	function soup() {
-		return "SOUP";
 	}
 
 	/*
