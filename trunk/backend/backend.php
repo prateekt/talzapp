@@ -59,7 +59,7 @@ class Backend  {
 	 * @return mapping of friend names to ints as described above; null if an error occurs. 
 	 */
 	function getFriendRecHelper($uid, $fList, $max_num) {
-		if($fList==NULL) {
+		if($fList==NULL || sizeof($fList) <= 0) {
 			return NULL;
 		}
 		
@@ -71,7 +71,12 @@ class Backend  {
 					$fIdToCount[''.$ffriend]++;
 			}
 		}
-		arsort($fIdToCount);
+		if(sizeof($fIdToCount) <= 0) {
+			return NULL;
+		}
+		else {
+			arsort($fIdToCount);
+		}
 		
 		//get names in list
 		$x=0;

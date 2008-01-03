@@ -27,19 +27,23 @@ $backend->dbManager->addEntry($userId, $friendList2);
 
 $result = $backend->getFriendRec();
 echo "Result: <BR><BR>";
-foreach($result as $frec => $count) {
-	echo $frec . " " . $count . "<BR>";
+if($result==NULL) {
+	echo "No Friends Reccomendations could be generated <BR>";
+} else {
+	foreach($result as $frec => $count) {
+		echo $frec . " " . $count . "<BR>";
+	}
 }
 
 //clean up db
-$result1 = $backend->dbManager->deleteEntry($backend->fbInterface->user);
+//$result1 = $backend->dbManager->deleteEntry($backend->fbInterface->user);
 $result2 = $backend->dbManager->deleteEntry("2538602");
 $result3 = $backend->dbManager->deleteEntry("2539178");
-if($result1 && $result2 && $result3) {
+if(/*$result1 &&*/ $result2 && $result3) {
 	echo "<BR>Cleanup Successful<BR>";
 }
 else {
-	echo "r1: " . $result1 . "<BR>";
+//	echo "r1: " . $result1 . "<BR>";
 	echo "r2: " . $result2 . "<BR>";
 	echo "r3: " . $result3 . "<BR>";
 }
@@ -70,7 +74,7 @@ foreach($result as $frec => $count) {
 	echo $frec . " " . $count . "<BR>";
 }
 
-//clean up db
+clean up db
 $result1 = $backend->dbManager->deleteEntry("101");
 $result2 = $backend->dbManager->deleteEntry("102");
 $result3 = $backend->dbManager->deleteEntry("103");
