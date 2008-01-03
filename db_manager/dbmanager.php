@@ -64,10 +64,10 @@ class DBManager {
 	 * comma-separated string. Returns true if the addition operation is successful.
 	 *
 	 * @param $userId - the id of the user
-	 * @param $friendList - the list of friends attached to the user
+	 * @param $fList - the list of friends attached to the user
 	 * @return true or false depending on whether the addition to the database is successful.
 	 */
-	function addEntry($userId, $friendList) {
+	function addEntry($userId, $fList) {
 		$dbConnection = $this->dbCon;
 		$userId = mysql_escape_string($userId);
 		if($dbConnection==NULL) {
@@ -76,6 +76,12 @@ class DBManager {
 		//this statement has really no effect.
 		}
 		$this->deleteEntry($userId);
+		
+		$friendList = "";
+		foreach($fList as $elem) {
+			$friendList = $friendList . $elem . "**";
+		}
+		
 		$friendList = mysql_escape_string($friendList);
 		$query = "INSERT INTO ".$GLOBALS['ftable_name']." (UserId, FriendsList) VALUES ('".$userId. "', '".$friendList."')";
 		$result = mysql_query($query, $dbConnection);
@@ -107,11 +113,11 @@ class DBManager {
 			//put friends list into array of strings.
 			$friendsListArr = mysql_fetch_array($result);
 			$friendsListStr = $friendsListArr[0];
-			$tok = strtok($friendsListStr, ",");
+			$tok = strtok($friendsListStr, "**");
 			$index=0;
 			while($tok!== false) {
 				$rtn[$index] = $tok;
-				$tok = strtok(",");
+				$tok = strtok("**");
 				$index++;
 			}		
 			return $rtn;
