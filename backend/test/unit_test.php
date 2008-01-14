@@ -28,7 +28,7 @@ $backend->dbManager->addEntry($userId, $friendList2);
 $result = $backend->getFriendRec();
 echo "Result: <BR><BR>";
 if($result==NULL) {
-	echo "No Friends Reccomendations could be generated <BR>";
+	echo "No Friends Recomendations could be generated <BR>";
 } else {
 	foreach($result as $frec => $count) {
 		echo $frec . " " . $count . "<BR>";
